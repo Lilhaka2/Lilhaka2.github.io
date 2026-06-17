@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess The Animal</title>
+    <style>
+        body{
+            font-family:Arial,sans-serif;
+            background:#222;
+            color:white;
+            text-align:center;
+            padding-top:50px;
+        }
+
+        .box{
+            background:#333;
+            width:300px;
+            margin:auto;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        input{
+            padding:10px;
+            width:80%;
+            margin-top:10px;
+        }
+
+        button{
+            padding:10px 20px;
+            margin-top:10px;
+            cursor:pointer;
+        }
+
+        #result{
+            margin-top:15px;
+            font-size:20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Guess The Animal</h1>
+
+    <p id="hint">Hint: I say "Meow"</p>
+
+    <input type="text" id="guess" placeholder="Type animal name">
+
+    <br>
+
+    <button onclick="checkGuess()">Guess</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+const animals = [
+    {name:"cat", hint:'I say "Meow"'},
+    {name:"dog", hint:'I say "Woof"'},
+    {name:"cow", hint:'I give milk'},
+    {name:"lion", hint:'King of the jungle'},
+    {name:"elephant", hint:'I have a trunk'}
+];
+
+let currentAnimal =
+    animals[Math.floor(Math.random() * animals.length)];
+
+document.getElementById("hint").textContent =
+    "Hint: " + currentAnimal.hint;
+
+function checkGuess() {
+
+    let guess =
+        document.getElementById("guess")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(guess === currentAnimal.name){
+
+        document.getElementById("result")
+        .textContent = "Correct 🎉";
+
+        currentAnimal =
+            animals[Math.floor(Math.random() * animals.length)];
+
+        document.getElementById("hint")
+        .textContent = "Hint: " + currentAnimal.hint;
+
+        document.getElementById("guess").value = "";
+
+    } else {
+
+        document.getElementById("result")
+        .textContent = "Wrong try again";
+
+    }
+}
+</script>
+
+</body>
+</html>
